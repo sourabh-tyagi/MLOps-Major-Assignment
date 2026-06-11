@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Face Recognition System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Segoe UI, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .upload-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        input[type=file] {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .result-section {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            background: #fafafa;
+            margin-bottom: 30px;
+        }
+
+        .preview-box {
+            flex: 0 0 160px;
+            text-align: center;
+        }
+
+        .preview-image {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 3px solid #3498db;
+            background-color: #eee;
+        }
+
+        .result-box {
+            flex: 1;
+        }
+
+        .clear-btn {
+            display: inline-block;
+            margin-top: 10px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .clear-btn:hover {
+            background: #c0392b;
+        }
+
+        .info-grid {
+            margin-top: 20px;
+        }
+
+        .result-box h3 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .result-box p {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 35px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3498db;
+        }
+
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            color: #444;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Face Recognition System</h1>
+
+        <p class="subtitle">
+            MLOps Major Assignment - Olivetti Face Classification
+        </p>
+
+        <div class="upload-section">
+
+            <form method="POST" enctype="multipart/form-data">
+
+                <input type="file" name="image" accept="image/*" required>
+
+                <br>
+
+                <button type="submit">
+                    Predict Face
+                </button>
+
+            </form>
+
+        </div>
+
+        {% if image_path and prediction %}
+        <div class="result-section">
+
+            <div class="preview-box">
+
+                <h5>Uploaded Image</h5>
+
+                <br>
+
+                <img src="/{{ image_path }}" alt="Uploaded Image" class="preview-image">
+
+            </div>
+
+            <div class="result-box">
+
+                <h3>✅ Prediction Result</h3>
+
+                <p>{{ prediction }}</p>
+
+                <br>
+
+                <button class="clear-btn" onclick="window.location.href='/'">
+                    Clear & Upload
+                </button>
+
+            </div>
+
+        </div>
+        {% endif %}
+
+
+        <div class="info-grid">
+
+            <div class="card">
+
+                <h3>⚙️ How It Works</h3>
+
+                <ul>
+                    <li>Upload a face image using the file picker.</li>
+                    <li>The system processes the image and prepares it for analysis.</li>
+                    <li>A trained Machine Learning model analyzes facial patterns.</li>
+                    <li>The image is compared with faces from the Olivetti Faces dataset.</li>
+                    <li>The closest matching face class is displayed as the prediction.</li>
+                </ul>
+
+            </div>
+
+            <div class="card">
+
+                <h3>📚 About Olivetti Dataset</h3>
+
+                <ul>
+                    <li>Contains 400 grayscale face images.</li>
+                    <li>Includes 40 different individuals.</li>
+                    <li>Each individual has 10 face images.</li>
+                    <li>Images are standardized to 64 × 64 pixels.</li>
+                    <li>Widely used for Machine Learning and face recognition research.</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="footer">
+            Built using Flask, Scikit-Learn, Docker and Kubernetes
+        </div>
+
+    </div>
+
+</body>
+
+</html>
