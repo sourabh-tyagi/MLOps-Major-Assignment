@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: mlops-face-app
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: mlops-face-app
+
+  template:
+
+    metadata:
+      labels:
+        app: mlops-face-app
+
+    spec:
+
+      containers:
+
+      - name: mlops-face-app
+
+        image: sourabhtyagi/mlops-face-app:v2
+
+        ports:
+        - containerPort: 5000
